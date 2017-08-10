@@ -21,9 +21,13 @@ https://github.com/hitbtc-com/hitbtc-api/blob/master/APIv2.md
 
 ### Info
 If you want learn more about algorithms, python 3, C++, matlab visit:
+
 www.professormarcolan.com.br
 
 You liked and want support the project donate to :
+
 Eth: 0xb641e28C20574E968EB18dadd5060c33083a6b45
+
 Bitcoin: 17tzJPnyJMsW2TRSi4TCTQ4YSawB6JkZU7
+
 LTC: LVsA5ZTkcJMRSVR24XMM3Lj98sixMUisMd
