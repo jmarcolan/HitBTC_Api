@@ -13,13 +13,13 @@ The project uses the Python 3.6.1 language and uses only the standard libraries.
 
 	
 
-###References
+### References
 You can have more information at:
 https://hitbtc.com/api
 https://github.com/hitbtc-com/hitbtc-api/blob/master/APIv2.md
 
 
-###Info
+### Info
 If you want learn more about algorithms, python 3, C++, matlab visit:
 www.professormarcolan.com.br
 
