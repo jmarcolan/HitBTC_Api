@@ -3,19 +3,33 @@
 #https://github.com/jmarcolan/HitBTC_Api
 #if you like
 #donate ETH: 0xb641e28C20574E968EB18dadd5060c33083a6b45
+#donate BTC: 17tzJPnyJMsW2TRSi4TCTQ4YSawB6JkZU7
 
 '''
 API Documentation:
  * Public API v1 (https://hitbtc.com/api#marketrestful)
+ * Trade API v2 (https://github.com/hitbtc-com/hitbtc-api/blob/master/APIv2.md)
 '''
 
 import json, requests
+import datetime
+import hashlib
+import hmac
+import random
+import string
+import time
+import http.client
+import urllib.parse
+import urllib.request
 
 
+#class public api from hitBtc
 class public_api(object):
     def __init__(self):
         self.url= 'http://api.hitbtc.com'
-
+        self.conn = http.client.HTTPSConnection('api.hitbtc.com')
+  
+    #function to return serv time
     def time(self):
         response = requests.get( self.url + "/api/1/public/time")
         print(response.content)
@@ -26,36 +40,72 @@ class public_api(object):
         print(response.content)
         return json.loads(response.content)
 
+    #function to return ticker information
+    #@pair = Trading symbol (e.g. ETHUSD)
     def ticker(self,tpair):
-        # example hit.ticker("ETHUSD")
         response = requests.get( self.url +"/api/1/public/"+tpair+"/ticker")
         print(response.content)
         return json.loads(response.content)
-    
+
+    #function to return orderbook
+    #@pair = Trading symbol (e.g. ETHUSD)
     def orderbook(self, tpair):
         response = requests.get( self.url +"/api/1/public/"+tpair+"/orderbook")
         print(response.content)
         return json.loads(response.content)
     
+    #function to get lasts trades
+    #@pair = Trading symbol (e.g. ETHUSD)
     def trades(self, tpair):
         response = requests.get( self.url +"/api/1/public/"+tpair+"/trades")
         print(response.content)
         return json.loads(response.content)
 
-    #dosent work yet
-    def tradesTimeStamp(self,tpair,beginPeriod,endPeriod):
-        request = self.url + "/api/1/public/" + tpair+"/trades?"
-        request = request + "from="+beginPeriod+"&till="+endPeriod     #"from=0&by=trade_id&sort=desc&start_index=0&max_results=100"
-        request = request + "&by=trade_id" + "&format_timestamp=second"
-        response = requests.get( request)
-        print(response.content)
-        return json.loads(response.content)
         
     
-        
+#class trade api from hitBtc
 class trade_api:
-    def __init__(self, name):
-        self.key = name
+    def __init__(self, apiKey, apiSecret):
+        self.key = apiKey
+        self.secret = apiSecret
+        self.nonce= self.rand();
+        self.url= "https://api.hitbtc.com"
+
+    #function to create a unique value 
+    def rand(self):
+        return str(int(time.mktime(datetime.datetime.now().timetuple()) * 1000 + datetime.datetime.now().microsecond / 1000))
+
+    #function return balance from all coins
+    def balance(self):
+        r = requests.get(self.url+'/api/2/trading/balance', auth=(self.key, self.secret))
+        print(r.json())
+        return r.json();
+
+    #function to set new order
+    #@pair = Trading symbol
+    #@transaction = tipe of transaction (sell or buy)
+    #@price = trade price
+    #@quantity = trade quantity
+    def new_order(self,tpair,transaction, quantity, price):
+        orderData = {'symbol':tpair, 'side': transaction.lower(), 'quantity': quantity, 'price': price }
+        r = requests.post(self.url+'/api/2/order', data = orderData, auth=(self.key, self.secret))        
+        print(r.json())
+        return r.json();
+
+    #function to cancel orders
+    #@pair = Trading symbol
+    def cancel_orders(self,tpair=None):
+        orderData = {'symbol': tpair}
+        r = requests.delete(self.url+'/api/2/order', data = orderData, auth=(self.key, self.secret))  
+        print(r.json())
+        return r.json();
+
+    
+
+
+
+        
+        
 
 
 
