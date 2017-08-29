@@ -1,5 +1,5 @@
 # HitBtc API Class
-# Developed by jmarcolan in Python 3
+# Developed by jmarcolan in Python 3.5.4 64 bit
 # https://github.com/jmarcolan/HitBTC_Api
 # if you like
 # donate ETH: 0xb641e28C20574E968EB18dadd5060c33083a6b45

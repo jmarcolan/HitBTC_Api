@@ -3,20 +3,21 @@
 ## About the project
 
 This project aims to facilitate the development of trade robots for the HitBTC website.
-The project uses the Python 3.6.1 language and uses only the standard libraries. They have two classes:
+The project uses the Python 3.5.4 64bit language and uses only Requests package from the non standard libraries. For install Requests package open windows prompt command and write "pip install Requests"
+
+They have two classes:
 
 	*public_api class that has access to the market data functions: get ticker, order book, trades, etc.
-	*trade_api class that has performing trading operations: get trading balance, place or cancel orders, 
-	get history, etc. 
+	*trade_api class that has performing trading operations: get trading balance, place or cancel orders,
+	get history, etc.
 	(to use that class you need one api key and secret you cn grante on https://hitbtc.com/settings/ Api-keys)
 
 
-	
+
 
 ### References
 You can have more information at:
 https://hitbtc.com/api
-
 https://github.com/hitbtc-com/hitbtc-api/blob/master/APIv2.md
 
 
